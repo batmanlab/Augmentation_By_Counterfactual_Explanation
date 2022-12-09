@@ -1,0 +1,38 @@
+###########
+# Classifier #
+###########
+seed: 0
+imgpath: '/ocean/projects/asc170022p/singla/Datasets/HAM10000/imgs'
+output_dir: 'Output'
+# Required columns: (lesion_id, image_id) or names, 
+data_file: '/jet/home/nmurali/asc170022p/nmurali/projects/shortcut_detection_and_mitigation/data/ham10k/ham.csv'
+column_name_split: 'val_train_test'
+class_names: 'mel_or_bkl'
+size: 64
+dataset: 'HAM'
+mixUp: False
+labelSmoothing: False
+focalLoss: False
+num_classes: 1
+drop_rate: 0.00
+num_epochs: 30
+batch_size: 64
+model: 'densenet121'
+opt: 'adam'
+channel: 3
+cuda: True
+shuffle: True
+lr: 0.001
+threads: 4
+taskweights: True
+featurereg: False
+weightreg: False
+data_aug_hf: 0.5
+# hyper-parameter for mix-up and label smoothing
+alpha: 0.2
+multi_class: True
+
+# hyper-parameter while saving the classifier output: TEST
+ckpt_name: ''
+partition_name: ["test"]
+TS: True

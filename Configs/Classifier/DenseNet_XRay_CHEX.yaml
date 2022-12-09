@@ -1,0 +1,38 @@
+###########
+# Classifier #
+###########
+seed: 0
+imgpath: '/ocean/projects/asc170022p/shared/Data/chestXRayDatasets/StanfordCheXpert/'
+output_dir: 'Output'
+data_file: '/jet/home/nmurali/asc170022p/nmurali/projects/augmentation_by_explanation_eccv22/Data/chex_train.csv'
+data_file_test: /jet/home/nmurali/asc170022p/nmurali/projects/augmentation_by_explanation_eccv22/Data/chex_valid.csv
+class_names: 'Enlarged Cardiomediastinum,Cardiomegaly,Lung Opacity,Lung Lesion,Edema,Consolidation,Pneumonia,Atelectasis,Pneumothorax,Pleural Effusion,Pleural Other,Fracture,Support Devices'
+num_classes: 13
+size: 256
+dataset: 'Stanford-CHEX'
+mixUp: False
+labelSmoothing: False
+focalLoss: False
+drop_rate: 0.00
+num_epochs: 40
+batch_size: 40
+model: 'densenet121'
+opt: 'adam'
+channel: 1
+cuda: True
+shuffle: True
+lr: 0.0001
+threads: 4
+taskweights: True
+featurereg: False
+weightreg: False
+data_aug_hf: 0.5
+# hyper-parameter for mix-up and label smoothing
+alpha: 0.2
+multi_class: False
+
+
+# hyper-parameter while saving the classifier output: TEST
+ckpt_name: ''
+partition_name: ["test"]
+TS: True

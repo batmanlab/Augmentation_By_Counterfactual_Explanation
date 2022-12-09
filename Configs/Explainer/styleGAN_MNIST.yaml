@@ -1,0 +1,94 @@
+###########
+# Explainer #
+###########
+seed: 0
+device: "cuda"
+
+# ..........................................................................
+# CLASSIFIER PARAMETERS
+dataset_name: 'MNIST'
+# path to the classifier's checkpoint
+cls_ckpt: 'Classifier/torchxrayvision_/Experiment_Skin_Lesion/HAM_256/DenseNet_NV_Other/HAM-densenet169-HAM_256-e35.pt'
+# number of classes used in training the classifier
+num_cls: 2
+# dropout rate used while training the classifier
+cls_drop_rate: 0.0
+# size of the logit layer of the classifier. Provide 0 if you don't want to concatenate the classifier logit with the discriminator embedding before the final discriminator fully connected layer.
+concate_size: 1664
+cls_model_type: 'densenet169'
+cls_multi_label: False
+destination_cls: -1
+# ..........................................................................
+# EXPLAINER PARAMETERS
+# path to the csv file having columns:
+# column name: image_id or names --> Absolute path of the image file
+path: 'Classifier/torchxrayvision_/Experiment_Skin_Lesion/HAM_256/DenseNet_NV_Other/HAM-densenet169-HAM_256-e35.pt_outcomes_train.csv'
+imgpath: '/ocean/projects/asc170022p/singla/Datasets/HAM10000/imgs'
+# path where files from current experiment will be saved. Within this folder, we will create following folders:
+# * encoder_sample: Examples of images created by the GAN at different steps.
+# * checkpoint
+save_dir: 'stylegan2Pytorch/Experiment_Skin_Lesion/DenseNet_NV_Other_35/'
+# path to the checkpoints to resume training
+ckpt: ''
+start_iter: 0
+# lambda hyper-parameters for balancing the different loss terms
+# Reconstruction loss over the images
+l1: 100.0
+# Reconstruction loss over the embeddings
+el1: 0.0
+# KL loss for classification consistency
+dkl: 10
+# adversarial loss
+adv: 1
+# Counterfactual flips the decision of the classifier from being positive for a source task to being positive for a destination task
+source_task: 0
+destination_task: 1 
+
+# ..........................................................................
+# StyleGAn 2 training parameters
+# image sizes for the model
+size: 256
+# size of latent dimension
+latent: 512
+# number of layers in MLP
+n_mlp: 8
+# total training iterations
+iter: 800000
+# batch sizes for each gpus
+batch: 4
+# number of the samples generated during training
+n_sample: 8
+# weight of the r1 regularization
+r1: 10.0
+# weight of the path length regularization
+path_regularize: 2
+# batch size reducing factor for the path length regularization (reduce memory consumption)
+path_batch_shrink: 2
+# interval of the applying r1 regularization
+d_reg_every: 16
+# interval of the applying path length regularization
+g_reg_every: 4
+# probability of latent code mixing
+mixing: 0.9
+# learning rate
+lr: 0.002
+# channel multiplier factor for the model. config-f = 2, else = 1
+channel_multiplier: 2
+# use weights and biases logging
+wandb: False
+# local rank for distributed training
+local_rank: 0
+# apply non leaking augmentation
+augment: False
+# probability of applying augmentation. 0 = use adaptive augmentation
+augment_p: 0 
+# target augmentation probability for adaptive augmentation
+ada_target: 0.3
+# target duration to reach augmentation probability for adaptive augmentation
+ada_length: 500000
+# probability update interval of the adaptive augmentation
+ada_every: 256
+
+
+
+
